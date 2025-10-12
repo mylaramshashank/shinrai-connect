@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <img src={logo} alt="Shinrai Connect" className="h-16 w-auto" />
+            <img src={logo} alt="Shinrai Connect" className="h-20 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
