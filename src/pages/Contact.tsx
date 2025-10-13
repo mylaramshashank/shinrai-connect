@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, Globe, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -13,7 +13,7 @@ const Contact = () => {
     name: "",
     email: "",
     company: "",
-    service: "",
+    services: [] as string[],
     message: "",
   });
 
@@ -23,12 +23,32 @@ const Contact = () => {
       title: "Transmission Received! ■",
       description: "We'll contact you soon to begin your digital adventure.",
     });
-    setFormData({ name: "", email: "", company: "", service: "", message: "" });
+    setFormData({ name: "", email: "", company: "", services: [], message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleServiceToggle = (service: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      services: prev.services.includes(service)
+        ? prev.services.filter((s) => s !== service)
+        : [...prev.services, service],
+    }));
+  };
+
+  const serviceOptions = [
+    { value: "web-development", label: "Web Development" },
+    { value: "digital-marketing", label: "Digital Marketing" },
+    { value: "seo-optimization", label: "SEO Optimization" },
+    { value: "social-media", label: "Social Media Management" },
+    { value: "content-creation", label: "Content Creation" },
+    { value: "branding", label: "Branding & Design" },
+    { value: "consulting", label: "Consulting" },
+    { value: "other", label: "Other" },
+  ];
 
   const contactInfo = [
     {
@@ -119,28 +139,28 @@ const Contact = () => {
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="service" className="text-sm font-poppins text-muted-foreground">
-                      Service
+                  <div className="space-y-3">
+                    <label className="text-sm font-poppins text-muted-foreground">
+                      Services (Select all that apply)
                     </label>
-                    <Select
-                      value={formData.service}
-                      onValueChange={(value) => setFormData({ ...formData, service: value })}
-                    >
-                      <SelectTrigger className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground">
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="web-development">Web Development</SelectItem>
-                        <SelectItem value="digital-marketing">Digital Marketing</SelectItem>
-                        <SelectItem value="seo-optimization">SEO Optimization</SelectItem>
-                        <SelectItem value="social-media">Social Media Management</SelectItem>
-                        <SelectItem value="content-creation">Content Creation</SelectItem>
-                        <SelectItem value="branding">Branding & Design</SelectItem>
-                        <SelectItem value="consulting">Consulting</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {serviceOptions.map((service) => (
+                        <div key={service.value} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={service.value}
+                            checked={formData.services.includes(service.value)}
+                            onCheckedChange={() => handleServiceToggle(service.value)}
+                            className="border-primary/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                          />
+                          <label
+                            htmlFor={service.value}
+                            className="text-sm font-poppins text-foreground cursor-pointer"
+                          >
+                            {service.label}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="space-y-2">
