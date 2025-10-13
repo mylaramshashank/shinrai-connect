@@ -40,14 +40,15 @@ const Contact = () => {
   };
 
   const serviceOptions = [
-    { value: "web-development", label: "Web Development" },
-    { value: "digital-marketing", label: "Digital Marketing" },
-    { value: "seo-optimization", label: "SEO Optimization" },
-    { value: "social-media", label: "Social Media Management" },
+    { value: "social-media-marketing", label: "Social Media Marketing" },
+    { value: "seo-google-ads", label: "SEO & Google Ads" },
+    { value: "brand-strategy", label: "Brand Strategy" },
+    { value: "web-design-development", label: "Web Design & Development" },
     { value: "content-creation", label: "Content Creation" },
-    { value: "branding", label: "Branding & Design" },
-    { value: "consulting", label: "Consulting" },
-    { value: "other", label: "Other" },
+    { value: "lead-generation", label: "Lead Generation Campaigns" },
+    { value: "email-marketing", label: "Email Marketing" },
+    { value: "ecommerce-marketing", label: "E-Commerce Marketing" },
+    { value: "video-production", label: "Video Production & Editing" },
   ];
 
   const contactInfo = [
