@@ -23,7 +23,7 @@ const Contact = () => {
       title: "Transmission Received! ■",
       description: "We'll contact you soon to begin your digital adventure.",
     });
-    setFormData({ name: "", email: "", company: "", services: [], message: "" });
+    setFormData({ name: "", email: "", company: "", serviceOptions: [], message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
