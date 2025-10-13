@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, Globe, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -12,6 +13,7 @@ const Contact = () => {
     name: "",
     email: "",
     company: "",
+    service: "",
     message: "",
   });
 
@@ -21,7 +23,7 @@ const Contact = () => {
       title: "Transmission Received! ■",
       description: "We'll contact you soon to begin your digital adventure.",
     });
-    setFormData({ name: "", email: "", company: "", message: "" });
+    setFormData({ name: "", email: "", company: "", service: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -115,6 +117,30 @@ const Contact = () => {
                       onChange={handleChange}
                       className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground"
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="service" className="text-sm font-poppins text-muted-foreground">
+                      Service
+                    </label>
+                    <Select
+                      value={formData.service}
+                      onValueChange={(value) => setFormData({ ...formData, service: value })}
+                    >
+                      <SelectTrigger className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground">
+                        <SelectValue placeholder="Select a service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="web-development">Web Development</SelectItem>
+                        <SelectItem value="digital-marketing">Digital Marketing</SelectItem>
+                        <SelectItem value="seo-optimization">SEO Optimization</SelectItem>
+                        <SelectItem value="social-media">Social Media Management</SelectItem>
+                        <SelectItem value="content-creation">Content Creation</SelectItem>
+                        <SelectItem value="branding">Branding & Design</SelectItem>
+                        <SelectItem value="consulting">Consulting</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="space-y-2">
