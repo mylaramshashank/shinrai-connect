@@ -140,21 +140,34 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-sm font-poppins text-muted-foreground">
-                      Services (Select all that apply)
+                    <label className="text-sm font-poppins font-semibold text-foreground">
+                      Services Interested In
                     </label>
+                    <p className="text-xs text-muted-foreground mb-4">Select all services that apply to your needs</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {serviceOptions.map((service) => (
-                        <div key={service.value} className="flex items-center space-x-2">
+                        <div
+                          key={service.value}
+                          onClick={() => handleServiceToggle(service.value)}
+                          className={`
+                            relative flex items-center gap-3 p-4 rounded-lg border-2 cursor-pointer
+                            transition-all duration-300 hover:shadow-md hover:scale-[1.02]
+                            ${
+                              formData.services.includes(service.value)
+                                ? "border-primary bg-primary/10 shadow-sm"
+                                : "border-border bg-card hover:border-primary/50"
+                            }
+                          `}
+                        >
                           <Checkbox
                             id={service.value}
                             checked={formData.services.includes(service.value)}
                             onCheckedChange={() => handleServiceToggle(service.value)}
-                            className="border-primary/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            className="border-primary/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary pointer-events-none"
                           />
                           <label
                             htmlFor={service.value}
-                            className="text-sm font-poppins text-foreground cursor-pointer"
+                            className="text-sm font-poppins font-medium text-foreground cursor-pointer flex-1 pointer-events-none"
                           >
                             {service.label}
                           </label>
