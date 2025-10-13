@@ -16,6 +16,7 @@ const Contact = () => {
     services: [] as string[],
     message: "",
   });
+  const [otherService, setOtherService] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ const Contact = () => {
       description: "We'll contact you soon to begin your digital adventure.",
     });
     setFormData({ name: "", email: "", company: "", services: [], message: "" });
+    setOtherService("");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,13 +42,15 @@ const Contact = () => {
   };
 
   const serviceOptions = [
-    { value: "web-development", label: "Web Development" },
-    { value: "digital-marketing", label: "Digital Marketing" },
-    { value: "seo-optimization", label: "SEO Optimization" },
-    { value: "social-media", label: "Social Media Management" },
+    { value: "social-media-marketing", label: "Social Media Marketing" },
+    { value: "seo-google-ads", label: "SEO & Google Ads" },
+    { value: "brand-strategy", label: "Brand Strategy" },
+    { value: "web-design-development", label: "Web Design & Development" },
     { value: "content-creation", label: "Content Creation" },
-    { value: "branding", label: "Branding & Design" },
-    { value: "consulting", label: "Consulting" },
+    { value: "lead-generation", label: "Lead Generation Campaigns" },
+    { value: "email-marketing", label: "Email Marketing" },
+    { value: "ecommerce-marketing", label: "E-Commerce Marketing" },
+    { value: "video-production", label: "Video Production & Editing" },
     { value: "other", label: "Other" },
   ];
 
@@ -140,27 +144,59 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-sm font-poppins text-muted-foreground">
-                      Services (Select all that apply)
-                    </label>
+                    <div className="space-y-2">
+                      <label className="text-base font-semibold font-poppins text-foreground">
+                        Services Interested In
+                      </label>
+                      <p className="text-sm text-muted-foreground font-poppins">
+                        Select all services you're interested in
+                      </p>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {serviceOptions.map((service) => (
-                        <div key={service.value} className="flex items-center space-x-2">
+                        <div
+                          key={service.value}
+                          onClick={() => handleServiceToggle(service.value)}
+                          className={`
+                            flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer
+                            transition-all duration-300 hover:shadow-md hover:scale-[1.02]
+                            ${
+                              formData.services.includes(service.value)
+                                ? "border-primary bg-primary/10 shadow-sm"
+                                : "border-border bg-card hover:border-primary/50"
+                            }
+                          `}
+                        >
                           <Checkbox
                             id={service.value}
                             checked={formData.services.includes(service.value)}
-                            onCheckedChange={() => handleServiceToggle(service.value)}
-                            className="border-primary/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            className="border-primary/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary pointer-events-none"
                           />
                           <label
                             htmlFor={service.value}
-                            className="text-sm font-poppins text-foreground cursor-pointer"
+                            className="text-sm font-poppins text-foreground cursor-pointer flex-1 pointer-events-none"
                           >
                             {service.label}
                           </label>
                         </div>
                       ))}
                     </div>
+                    
+                    {formData.services.includes("other") && (
+                      <div className="space-y-2 animate-fade-in">
+                        <label htmlFor="otherService" className="text-sm font-poppins text-muted-foreground">
+                          Please specify the service you need
+                        </label>
+                        <Input
+                          id="otherService"
+                          name="otherService"
+                          value={otherService}
+                          onChange={(e) => setOtherService(e.target.value)}
+                          placeholder="Enter the service you're looking for..."
+                          className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div className="space-y-2">
