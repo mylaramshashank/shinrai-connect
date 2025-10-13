@@ -35,7 +35,7 @@ const HowItWorks = () => {
       icon: <TrendingUp className="w-16 h-16" />,
       step: "03",
       title: "Level Up Continuously",
-      symbol: "■",
+      symbol: "■■■",
       description: "We launch, monitor, and optimize your campaigns in real-time. Your success is measured, celebrated, and scaled.",
       details: [
         "Campaign execution",
