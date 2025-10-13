@@ -40,13 +40,16 @@ const Contact = () => {
   };
 
   const serviceOptions = [
-    { value: "web-development", label: "Web Development" },
+    { value: "web-development & design", label: "Web Development & Design" },
     { value: "digital-marketing", label: "Digital Marketing" },
-    { value: "seo-optimization", label: "SEO Optimization" },
-    { value: "social-media", label: "Social Media Management" },
+    { value: "seo & google ads", label: "SEO & Google Ads" },
+    { value: "social-media", label: "Social Media Marketing" },
     { value: "content-creation", label: "Content Creation" },
-    { value: "branding", label: "Branding & Design" },
-    { value: "consulting", label: "Consulting" },
+    { value: "brand strategy", label: "Brand Strategy" },
+    { value: "lead Generation campaigns", label: "Lead Generation campaigns" },
+    { value: "email Marketing", label: "Email Marketing" },
+    { value: "e-Commerce Marketing", label: "E-Commerce Marketing" },
+    { value: "video production & Editing", label: "Video production & Editing" },
     { value: "other", label: "Other" },
   ];
 
