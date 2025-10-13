@@ -40,15 +40,14 @@ const Contact = () => {
   };
 
   const serviceOptions = [
-    { value: "social-media-marketing", label: "Social Media Marketing" },
-    { value: "seo-google-ads", label: "SEO & Google Ads" },
-    { value: "brand-strategy", label: "Brand Strategy" },
-    { value: "web-design-development", label: "Web Design & Development" },
+    { value: "web-development", label: "Web Development" },
+    { value: "digital-marketing", label: "Digital Marketing" },
+    { value: "seo-optimization", label: "SEO Optimization" },
+    { value: "social-media", label: "Social Media Management" },
     { value: "content-creation", label: "Content Creation" },
-    { value: "lead-generation", label: "Lead Generation Campaigns" },
-    { value: "email-marketing", label: "Email Marketing" },
-    { value: "ecommerce-marketing", label: "E-Commerce Marketing" },
-    { value: "video-production", label: "Video Production & Editing" },
+    { value: "branding", label: "Branding & Design" },
+    { value: "consulting", label: "Consulting" },
+    { value: "other", label: "Other" },
   ];
 
   const contactInfo = [
@@ -141,34 +140,21 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-sm font-poppins font-semibold text-foreground">
-                      Services Interested In
+                    <label className="text-sm font-poppins text-muted-foreground">
+                      Services (Select all that apply)
                     </label>
-                    <p className="text-xs text-muted-foreground mb-4">Select all services that apply to your needs</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {serviceOptions.map((service) => (
-                        <div
-                          key={service.value}
-                          onClick={() => handleServiceToggle(service.value)}
-                          className={`
-                            relative flex items-center gap-3 p-4 rounded-lg border-2 cursor-pointer
-                            transition-all duration-300 hover:shadow-md hover:scale-[1.02]
-                            ${
-                              formData.services.includes(service.value)
-                                ? "border-primary bg-primary/10 shadow-sm"
-                                : "border-border bg-card hover:border-primary/50"
-                            }
-                          `}
-                        >
+                        <div key={service.value} className="flex items-center space-x-2">
                           <Checkbox
                             id={service.value}
                             checked={formData.services.includes(service.value)}
                             onCheckedChange={() => handleServiceToggle(service.value)}
-                            className="border-primary/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary pointer-events-none"
+                            className="border-primary/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                           />
                           <label
                             htmlFor={service.value}
-                            className="text-sm font-poppins font-medium text-foreground cursor-pointer flex-1 pointer-events-none"
+                            className="text-sm font-poppins text-foreground cursor-pointer"
                           >
                             {service.label}
                           </label>
