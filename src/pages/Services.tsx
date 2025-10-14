@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FlipCard3D from "@/components/FlipCard3D";
 import { 
   Share2, 
   Search, 
@@ -80,29 +80,19 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gradient-to-b from-background to-card/30">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-10" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {services.map((service, index) => (
-              <Card
+              <FlipCard3D
                 key={index}
-                className="group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <CardHeader>
-                  <div className="text-primary group-hover:text-glow-cyan transition-all mb-4 animate-float">
-                    {service.icon}
-                  </div>
-                  <CardTitle className="text-2xl font-orbitron group-hover:text-primary transition-all">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground font-poppins">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                backContent={`Expert ${service.title.toLowerCase()} solutions tailored to your unique business needs. Let's elevate your brand together.`}
+                index={index}
+              />
             ))}
           </div>
         </div>

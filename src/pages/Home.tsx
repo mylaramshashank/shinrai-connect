@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import Hero from "@/components/Hero";
+import FlipCard3D from "@/components/FlipCard3D";
 import { Sparkles, Target, TrendingUp } from "lucide-react";
 
 const Home = () => {
@@ -38,7 +38,7 @@ const Home = () => {
             <p className="text-xl text-muted-foreground font-poppins">
               Guiding brands on their digital hero's journey, one strategic campaign at a time.
             </p>
-            <Button variant="neon" size="lg" asChild>
+            <Button variant="neon" size="lg" asChild className="button-3d">
               <Link to="/about">Discover Our Story</Link>
             </Button>
           </div>
@@ -46,8 +46,10 @@ const Home = () => {
       </section>
 
       {/* Services Highlight */}
-      <section className="py-20 relative">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
         <div className="absolute inset-0 grid-pattern opacity-10" />
+        
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-center mb-12">
             Power-Up Your Brand
@@ -56,28 +58,18 @@ const Home = () => {
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {services.map((service, index) => (
-              <Card
+              <FlipCard3D
                 key={index}
-                className="group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="p-6 space-y-4">
-                  <div className="text-primary group-hover:text-glow-cyan transition-all">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-2xl font-orbitron font-bold group-hover:text-primary transition-all">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground font-poppins">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                index={index}
+              />
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="hero" size="lg" asChild>
+            <Button variant="hero" size="lg" asChild className="button-3d">
               <Link to="/services">View All Services</Link>
             </Button>
           </div>
@@ -96,7 +88,7 @@ const Home = () => {
             <p className="text-xl text-muted-foreground font-poppins">
               Power Up Your Brand Today and Transform Your Digital Presence!
             </p>
-            <Button variant="hero" size="xl" asChild>
+            <Button variant="hero" size="xl" asChild className="button-3d">
               <Link to="/contact">Begin Your Adventure</Link>
             </Button>
           </div>

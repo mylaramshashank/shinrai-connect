@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import Hero3DBackground from "./Hero3DBackground";
 
 const Hero = () => {
   return (
@@ -16,6 +17,9 @@ const Hero = () => {
 
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 grid-pattern opacity-30" />
+
+      {/* 3D Floating Shapes */}
+      <Hero3DBackground />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-32 text-center">
@@ -41,12 +45,12 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button variant="hero" size="xl" asChild>
+            <Button variant="hero" size="xl" asChild className="button-3d">
               <Link to="/contact">
                 Start Your Journey <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            <Button variant="neon" size="xl" asChild>
+            <Button variant="neon" size="xl" asChild className="button-3d">
               <Link to="/services">Explore Services</Link>
             </Button>
           </div>
