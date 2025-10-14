@@ -1,4 +1,6 @@
-import FlipCard3D from "@/components/FlipCard3D";
+import GSAPAnimatedCard from "@/components/GSAPAnimatedCard";
+import GSAPTextAnimation from "@/components/GSAPTextAnimation";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import { 
   Share2, 
   Search, 
@@ -64,14 +66,14 @@ const Services = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 grid-pattern opacity-20" />
+        <AnimatedBackground variant="hero" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-orbitron font-bold">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <GSAPTextAnimation className="text-5xl md:text-7xl font-orbitron font-bold">
               Choose Your{" "}
               <span className="text-primary text-glow-cyan">Power-Up</span>
               <span className="text-secondary">■■</span>
-            </h1>
+            </GSAPTextAnimation>
             <p className="text-xl md:text-2xl text-muted-foreground font-poppins">
               Unlock the full potential of your brand with our comprehensive suite of digital services
             </p>
@@ -80,17 +82,16 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
-        <div className="absolute inset-0 grid-pattern opacity-10" />
+      <section className="py-20 relative overflow-hidden">
+        <AnimatedBackground variant="section" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {services.map((service, index) => (
-              <FlipCard3D
+              <GSAPAnimatedCard
                 key={index}
                 icon={service.icon}
                 title={service.title}
                 description={service.description}
-                backContent={`Expert ${service.title.toLowerCase()} solutions tailored to your unique business needs. Let's elevate your brand together.`}
                 index={index}
               />
             ))}
@@ -100,12 +101,12 @@ const Services = () => {
 
       {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 animate-pulse-glow" />
+        <AnimatedBackground variant="section" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-orbitron font-bold">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <GSAPTextAnimation className="text-4xl md:text-5xl font-orbitron font-bold">
               Ready to Level Up?
-            </h2>
+            </GSAPTextAnimation>
             <p className="text-xl text-muted-foreground font-poppins">
               Let's discuss which services will best power up your brand
             </p>
