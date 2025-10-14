@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero";
-import GSAPAnimatedCard from "@/components/GSAPAnimatedCard";
-import GSAPTextAnimation from "@/components/GSAPTextAnimation";
-import AnimatedBackground from "@/components/AnimatedBackground";
+import FlipCard3D from "@/components/FlipCard3D";
 import { Sparkles, Target, TrendingUp } from "lucide-react";
 
 const Home = () => {
@@ -30,14 +28,13 @@ const Home = () => {
       <Hero />
 
       {/* About Preview Section */}
-      <section className="py-20 relative overflow-hidden">
-        <AnimatedBackground variant="section" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <GSAPTextAnimation className="text-4xl md:text-5xl font-orbitron font-bold" delay={0.2}>
+      <section className="py-20 bg-gradient-to-b from-background to-card/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-orbitron font-bold">
               Your Digital Saga{" "}
               <span className="text-primary text-glow-cyan">Begins Here</span>
-            </GSAPTextAnimation>
+            </h2>
             <p className="text-xl text-muted-foreground font-poppins">
               Guiding brands on their digital hero's journey, one strategic campaign at a time.
             </p>
@@ -50,17 +47,18 @@ const Home = () => {
 
       {/* Services Highlight */}
       <section className="py-20 relative overflow-hidden">
-        <AnimatedBackground variant="section" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+        <div className="absolute inset-0 grid-pattern opacity-10" />
         
         <div className="container mx-auto px-4 relative z-10">
-          <GSAPTextAnimation className="text-4xl md:text-5xl font-orbitron font-bold text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-center mb-12">
             Power-Up Your Brand
             <span className="text-secondary">■■</span>
-          </GSAPTextAnimation>
+          </h2>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {services.map((service, index) => (
-              <GSAPAnimatedCard
+              <FlipCard3D
                 key={index}
                 icon={service.icon}
                 title={service.title}
@@ -80,13 +78,13 @@ const Home = () => {
 
       {/* CTA Banner */}
       <section className="py-20 relative overflow-hidden">
-        <AnimatedBackground variant="section" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 animate-pulse-glow" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <GSAPTextAnimation className="text-4xl md:text-6xl font-orbitron font-bold">
+            <h2 className="text-4xl md:text-6xl font-orbitron font-bold">
               Join the{" "}
               <span className="text-primary text-glow-cyan">Shinrai Universe</span>
-            </GSAPTextAnimation>
+            </h2>
             <p className="text-xl text-muted-foreground font-poppins">
               Power Up Your Brand Today and Transform Your Digital Presence!
             </p>
