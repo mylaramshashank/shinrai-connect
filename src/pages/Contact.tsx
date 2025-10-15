@@ -12,7 +12,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
     services: [] as string[],
     message: "",
   });
@@ -23,7 +22,7 @@ const Contact = () => {
       title: "Transmission Received! ■",
       description: "We'll contact you soon to begin your digital adventure.",
     });
-    setFormData({ name: "", email: "", company: "", services: [], message: "" });
+    setFormData({ name: "", email: "", services: [], message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -126,19 +125,6 @@ const Contact = () => {
                       onChange={handleChange}
                       className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground"
                       required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="company" className="text-sm font-poppins text-muted-foreground">
-                      Company
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground"
                     />
                   </div>
 
