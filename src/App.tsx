@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GlobalAnimatedBackground from "@/components/GlobalAnimatedBackground";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -20,8 +21,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen bg-background text-foreground">
-          <Navbar />
+        <div className="min-h-screen bg-background text-foreground relative">
+          <GlobalAnimatedBackground />
+          <div className="relative z-10">
+            <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -31,7 +34,8 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Footer />
+            <Footer />
+          </div>
         </div>
       </BrowserRouter>
     </TooltipProvider>

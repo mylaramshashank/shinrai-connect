@@ -238,6 +238,23 @@ All colors MUST be HSL.
     animation: particle-float linear infinite;
   }
 
+  /* Scan line animation for anime effect */
+  @keyframes scan-line {
+    0%, 100% {
+      opacity: 0.05;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.15;
+      transform: translateY(2px);
+    }
+  }
+
+  /* Radial gradient utility */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
   /* 3D Tilt Effect */
   .tilt-3d {
     transform-style: preserve-3d;
