@@ -16,19 +16,12 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Transmission Received! ■",
-      description: "We'll contact you soon to begin your digital adventure.",
-    });
-    setFormData({ name: "", email: "", services: [], message: "" });
-  };
-
+  // handle text inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // handle checkbox toggles
   const handleServiceToggle = (service: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -38,6 +31,47 @@ const Contact = () => {
     }));
   };
 
+  // handle submit
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const payload = {
+    name: formData.name,
+    email: formData.email,
+    services: formData.services,
+    message: formData.message,
+  };
+
+  try {
+    const response = await fetch("http://localhost:5678/webhook-test/9ba198ec-6728-47fa-8fda-3ae7f4c9570d", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      toast({
+        title: "🚀 Transmission Received!",
+        description: "Your message has been sent successfully. We’ll contact you soon!",
+      });
+      setFormData({ name: "", email: "", services: [], message: "" });
+    } else {
+      const errorText = await response.text();
+      console.error("Server responded with error:", errorText);
+      toast({
+        title: "⚠️ Transmission Failed",
+        description: "Something went wrong. Try again later.",
+      });
+    }
+  } catch (error) {
+    console.error("Network error:", error);
+    toast({
+      title: "❌ Network Error",
+      description: "Unable to reach Shinrai server.",
+    });
+  }
+};
+
   const serviceOptions = [
     { value: "web-development & design", label: "Web Development & Design" },
     { value: "digital-marketing", label: "Digital Marketing" },
@@ -45,10 +79,10 @@ const Contact = () => {
     { value: "social-media", label: "Social Media Marketing" },
     { value: "content-creation", label: "Content Creation" },
     { value: "brand strategy", label: "Brand Strategy" },
-    { value: "lead Generation campaigns", label: "Lead Generation campaigns" },
-    { value: "email Marketing", label: "Email Marketing" },
-    { value: "e-Commerce Marketing", label: "E-Commerce Marketing" },
-    { value: "video production & Editing", label: "Video production & Editing" },
+    { value: "lead generation campaigns", label: "Lead Generation Campaigns" },
+    { value: "email marketing", label: "Email Marketing" },
+    { value: "e-commerce marketing", label: "E-Commerce Marketing" },
+    { value: "video production & editing", label: "Video Production & Editing" },
     { value: "other", label: "Other" },
   ];
 
@@ -85,52 +119,42 @@ const Contact = () => {
               <span className="text-primary text-glow-cyan">Adventure</span>?
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground font-poppins">
-              Let's connect and start building your digital legend
+              Let's connect and start building your digital legend.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Form & Info */}
+      {/* Contact Section */}
       <section className="py-20 bg-gradient-to-b from-background to-card/30">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+            
             {/* Contact Form */}
             <Card className="bg-card/50 backdrop-blur-sm border-primary/20 animate-fade-in">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-poppins text-muted-foreground">
-                      Name
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground"
-                      required
-                    />
-                  </div>
+                  <Input
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
 
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-poppins text-muted-foreground">
-                      Email
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-3">
                     <label className="text-sm font-poppins text-muted-foreground">
-                      Services (Select all that apply)
+                      Services Interested In:
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {serviceOptions.map((service) => (
@@ -139,12 +163,8 @@ const Contact = () => {
                             id={service.value}
                             checked={formData.services.includes(service.value)}
                             onCheckedChange={() => handleServiceToggle(service.value)}
-                            className="border-primary/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                           />
-                          <label
-                            htmlFor={service.value}
-                            className="text-sm font-poppins text-foreground cursor-pointer"
-                          >
+                          <label htmlFor={service.value} className="text-sm font-poppins">
                             {service.label}
                           </label>
                         </div>
@@ -152,57 +172,43 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-poppins text-muted-foreground">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={5}
-                      className="bg-input border-primary/20 focus:border-primary focus:ring-primary text-foreground resize-none"
-                      required
-                    />
-                  </div>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={5}
+                    required
+                  />
 
                   <Button type="submit" variant="hero" size="lg" className="w-full">
                     Send Transmission <Send className="ml-2 w-5 h-5" />
-                    <span className="ml-2">■</span>
                   </Button>
                 </form>
               </CardContent>
             </Card>
 
             {/* Contact Info */}
-            <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <div className="space-y-6">
-                <h2 className="text-3xl font-orbitron font-bold">
-                  Get in Touch
-                  <span className="text-secondary ml-2">■</span>
-                </h2>
-                <p className="text-lg text-muted-foreground font-poppins">
-                  Have questions? Want to discuss your project? We're here to help you level up your digital presence.
-                </p>
-              </div>
-
+            <div className="space-y-8">
+              <h2 className="text-3xl font-orbitron font-bold">
+                Get in Touch <span className="text-secondary ml-2">■</span>
+              </h2>
+              
+              <p className="text-lg text-muted-foreground font-poppins">
+                Have questions? Want to discuss your project? We're here to help.
+              </p>
               <div className="space-y-4">
-                {contactInfo.map((info, index) => (
+                {contactInfo.map((info, i) => (
                   <Card
-                    key={index}
-                    className="bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/60 transition-all duration-300"
+                    key={i}
+                    className="bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/60 transition-all"
                   >
                     <CardContent className="p-6 flex items-center gap-4">
                       <div className="text-primary">{info.icon}</div>
                       <div className="flex-1">
-                        <div className="text-sm text-muted-foreground font-poppins">
-                          {info.label}
-                        </div>
-                        <a
-                          href={info.href}
-                          className="text-foreground hover:text-primary transition-colors font-poppins"
-                        >
+                        <div className="text-sm text-muted-foreground">{info.label}</div>
+                        <a href={info.href} className="text-foreground hover:text-primary">
                           {info.value}
                         </a>
                       </div>
@@ -210,47 +216,7 @@ const Contact = () => {
                   </Card>
                 ))}
               </div>
-
-              {/* Additional Info */}
-              <Card className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/30 backdrop-blur-sm">
-                <CardContent className="p-6 space-y-4">
-                  <h3 className="text-2xl font-orbitron font-bold text-glow-cyan">
-                    Why Choose Shinrai?
-                  </h3>
-                  <ul className="space-y-2 text-muted-foreground font-poppins">
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary text-xl">▸</span>
-                      <span>Expert team with proven track record</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary text-xl">▸</span>
-                      <span>Cutting-edge strategies & technology</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary text-xl">▸</span>
-                      <span>Transparent communication & reporting</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary text-xl">▸</span>
-                      <span>Results-driven approach</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Light Field Background Effect */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 animate-pulse-glow" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-orbitron font-bold">
-              Let's Create Something{" "}
-              <span className="text-secondary text-glow-pink">Legendary</span>
-            </h2>
           </div>
         </div>
       </section>
@@ -259,3 +225,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
