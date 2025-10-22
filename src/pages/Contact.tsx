@@ -43,7 +43,7 @@ const Contact = () => {
   };
 
   try {
-    const response = await fetch("http://localhost:5678/webhook-test/9ba198ec-6728-47fa-8fda-3ae7f4c9570d", {
+    const response = await fetch("http://localhost:5678/webhook/9ba198ec-6728-47fa-8fda-3ae7f4c9570d", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
