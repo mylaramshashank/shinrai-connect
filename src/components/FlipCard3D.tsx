@@ -17,12 +17,12 @@ const FlipCard3D = ({ icon, title, description, backContent, index }: FlipCard3D
     >
       <div className="card-3d-inner h-full">
         {/* Front of card */}
-        <Card className="card-3d-front group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/60 transition-all duration-300 cursor-pointer border-glow-cyan h-full">
+        <Card className="card-3d-front group bg-card/80 backdrop-blur-sm border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer h-full">
           <CardHeader>
-            <div className="text-primary group-hover:text-glow-cyan transition-all mb-4 animate-float">
+            <div className="text-primary group-hover:scale-110 transition-all mb-4">
               {icon}
             </div>
-            <CardTitle className="text-2xl font-orbitron group-hover:text-primary transition-all">
+            <CardTitle className="text-2xl font-orbitron">
               {title}
             </CardTitle>
           </CardHeader>
@@ -34,7 +34,7 @@ const FlipCard3D = ({ icon, title, description, backContent, index }: FlipCard3D
         </Card>
 
         {/* Back of card */}
-        <Card className="card-3d-back bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm border-secondary/40 h-full flex items-center justify-center">
+        <Card className="card-3d-back bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm border-border h-full flex items-center justify-center shadow-lg">
           <CardContent className="p-6 text-center">
             <div className="text-secondary mb-4">
               {icon}
