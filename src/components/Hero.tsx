@@ -58,8 +58,8 @@ const Hero = () => {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 pt-16 max-w-2xl mx-auto">
             {[
-              { value: "500+", label: "Projects" },
-              { value: "98%", label: "Success Rate" },
+              { value: "100+", label: "Projects" },
+              { value: "93%", label: "Success Rate" },
               { value: "24/7", label: "Support" },
             ].map((stat, index) => (
               <div key={index} className="text-center animate-float" style={{ animationDelay: `${index * 0.2}s` }}>
