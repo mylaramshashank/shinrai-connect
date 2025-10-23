@@ -1,9 +1,14 @@
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero3DBackground = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Disable mousemove effects on mobile for performance
+    if (isMobile) return;
+    
     const container = canvasRef.current;
     if (!container) return;
 
@@ -20,7 +25,7 @@ const Hero3DBackground = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   const shapes = [
     { size: 200, top: '10%', left: '10%', delay: 0, color: 'from-primary/20 to-transparent' },
@@ -30,9 +35,12 @@ const Hero3DBackground = () => {
     { size: 160, top: '20%', left: '50%', delay: 1, color: 'from-accent/20 to-transparent' },
   ];
 
+  // Reduce number of shapes on mobile for performance
+  const displayShapes = isMobile ? shapes.slice(0, 2) : shapes;
+
   return (
     <div ref={canvasRef} className="absolute inset-0 overflow-hidden pointer-events-none">
-      {shapes.map((shape, index) => (
+      {displayShapes.map((shape, index) => (
         <div
           key={index}
           className={`floating-shape absolute rounded-full bg-gradient-to-br ${shape.color} blur-3xl opacity-50`}

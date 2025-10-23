@@ -1,9 +1,14 @@
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ParticleBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Disable heavy particle animations on mobile
+    if (isMobile) return;
+    
     const container = containerRef.current;
     if (!container) return;
 
@@ -96,7 +101,7 @@ const ParticleBackground = () => {
     return () => {
       container.innerHTML = '';
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div

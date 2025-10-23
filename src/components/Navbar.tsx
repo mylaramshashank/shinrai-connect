@@ -28,7 +28,13 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={logo} alt="Shinrai Connect" className="h-20 w-auto" />
+            <img 
+              src={logo} 
+              alt="Shinrai Connect" 
+              className="h-20 w-auto" 
+              loading="eager"
+              decoding="async"
+            />
             <span className="font-orbitron font-bold text-primary text-glow-cyan hidden sm:block text-xl">
               SHINRAI CONNECT
             </span>

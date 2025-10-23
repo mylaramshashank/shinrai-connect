@@ -1,10 +1,15 @@
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const GlobalAnimatedBackground = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Disable mousemove effects on mobile for performance
+    if (isMobile) return;
+    
     const container = canvasRef.current;
     if (!container) return;
 
@@ -22,20 +27,26 @@ const GlobalAnimatedBackground = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
-  const orbs = [
-    { size: 500, top: '10%', left: '5%', delay: 0, gradient: 'from-primary/20 via-primary/10 to-transparent', duration: 20 },
-    { size: 400, top: '70%', left: '80%', delay: 2, gradient: 'from-secondary/20 via-secondary/10 to-transparent', duration: 25 },
-    { size: 600, top: '35%', left: '55%', delay: 4, gradient: 'from-primary/15 via-accent/8 to-transparent', duration: 30 },
-    { size: 300, top: '85%', left: '15%', delay: 3, gradient: 'from-secondary/15 via-secondary/8 to-transparent', duration: 22 },
-    { size: 450, top: '20%', left: '40%', delay: 1, gradient: 'from-accent/20 via-primary/10 to-transparent', duration: 28 },
-    { size: 550, top: '55%', left: '20%', delay: 5, gradient: 'from-primary/12 via-secondary/6 to-transparent', duration: 26 },
-    { size: 350, top: '5%', left: '70%', delay: 2.5, gradient: 'from-secondary/18 via-accent/8 to-transparent', duration: 24 },
-    { size: 480, top: '90%', left: '60%', delay: 4.5, gradient: 'from-primary/16 via-primary/8 to-transparent', duration: 27 },
-  ];
+  // Reduce complexity on mobile
+  const orbs = isMobile 
+    ? [
+        { size: 400, top: '20%', left: '10%', delay: 0, gradient: 'from-primary/20 via-primary/10 to-transparent', duration: 25 },
+        { size: 350, top: '60%', left: '60%', delay: 5, gradient: 'from-secondary/15 via-secondary/10 to-transparent', duration: 30 },
+      ]
+    : [
+        { size: 500, top: '10%', left: '5%', delay: 0, gradient: 'from-primary/20 via-primary/10 to-transparent', duration: 20 },
+        { size: 400, top: '70%', left: '80%', delay: 2, gradient: 'from-secondary/20 via-secondary/10 to-transparent', duration: 25 },
+        { size: 600, top: '35%', left: '55%', delay: 4, gradient: 'from-primary/15 via-accent/8 to-transparent', duration: 30 },
+        { size: 300, top: '85%', left: '15%', delay: 3, gradient: 'from-secondary/15 via-secondary/8 to-transparent', duration: 22 },
+        { size: 450, top: '20%', left: '40%', delay: 1, gradient: 'from-accent/20 via-primary/10 to-transparent', duration: 28 },
+        { size: 550, top: '55%', left: '20%', delay: 5, gradient: 'from-primary/12 via-secondary/6 to-transparent', duration: 26 },
+        { size: 350, top: '5%', left: '70%', delay: 2.5, gradient: 'from-secondary/18 via-accent/8 to-transparent', duration: 24 },
+        { size: 480, top: '90%', left: '60%', delay: 4.5, gradient: 'from-primary/16 via-primary/8 to-transparent', duration: 27 },
+      ];
 
-  const particles = Array.from({ length: 50 }, (_, i) => ({
+  const particles = Array.from({ length: isMobile ? 15 : 50 }, (_, i) => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     size: Math.random() * 4 + 1,
