@@ -60,6 +60,8 @@ const ParticleBackground = () => {
       });
     }
 
+    let rafId = 0;
+
     function animate() {
       if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -93,12 +95,13 @@ const ParticleBackground = () => {
         });
       });
 
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
     }
 
     animate();
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       container.innerHTML = '';
     };
   }, [isMobile]);

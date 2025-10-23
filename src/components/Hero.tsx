@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import Hero3DBackground from "./Hero3DBackground";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
+  const isMobile = useIsMobile();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -24,7 +26,7 @@ const Hero = () => {
       <div className="absolute inset-0 grid-pattern opacity-30" />
 
       {/* 3D Floating Shapes */}
-      <Hero3DBackground />
+      {!isMobile && <Hero3DBackground />}
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-32 text-center">
