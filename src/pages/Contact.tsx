@@ -43,7 +43,7 @@ const Contact = () => {
   };
 
   try {
-    const response = await fetch("https://cgtarho8um8wwm5jhn8xx15o.hooks.n8n.cloud/webhook/contact-page", {
+    const response = await fetch("https://n8n-service-bddm.onrender.com/webhook-test/contact-page", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
