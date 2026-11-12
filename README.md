@@ -1,73 +1,54 @@
-# Welcome to your Lovable project
+# Shinrai Connect
 
-## Project info
+Shinrai Connect is a digital marketing and creative services website. It presents the brand, its services, its working process, and a contact form for prospective clients.
 
-**URL**: https://lovable.dev/projects/0415b28e-52e4-4a3b-bf65-750297af62d4
+## Pages
 
-## How can I edit this code?
+| Route | Purpose |
+| --- | --- |
+| `/` | Home page with a brand introduction and featured services |
+| `/about` | Mission, vision, and brand story |
+| `/services` | Digital services catalogue |
+| `/how-it-works` | Three-stage client engagement process |
+| `/contact` | Contact form and contact information |
 
-There are several ways of editing your application.
+The services page currently lists social media marketing, SEO and Google Ads, brand strategy, web design and development, content creation, lead generation, email marketing, e-commerce marketing, and video production and editing.
 
-**Use Lovable**
+## Tech stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0415b28e-52e4-4a3b-bf65-750297af62d4) and start prompting.
+- React 18 and TypeScript
+- Vite with the SWC React plugin
+- React Router for client-side routes
+- Tailwind CSS, shadcn/ui, and Radix UI components
+- TanStack Query and Lucide icons
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting started
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Use Node.js and npm.
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
 git clone https://github.com/mylaramshashank/shinrai-connect.git
-
-# Step 2: Navigate to the project directory.
 cd shinrai-connect
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Vite prints the local development URL in the terminal after the server starts.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available scripts
 
-**Use GitHub Codespaces**
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Create a production build |
+| `npm run build:dev` | Create a development-mode build |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview the generated production build |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Contact form integration
 
-## What technologies are used for this project?
+The contact form in `src/pages/Contact.tsx` sends the submitted name, email, selected services, and message to the configured n8n `webhook-test` endpoint. This is a test-mode URL; verify the n8n workflow is actively listening before testing submissions. Before using the form for production enquiries, confirm that the endpoint is intentionally configured for production.
 
-This project is built with:
+## Lovable workspace
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/0415b28e-52e4-4a3b-bf65-750297af62d4) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+This repository is linked to the [Shinrai Connect Lovable project](https://lovable.dev/projects/0415b28e-52e4-4a3b-bf65-750297af62d4). Changes pushed to the repository can also be reflected in the linked Lovable project.
