@@ -49,6 +49,19 @@ Vite prints the local development URL in the terminal after the server starts.
 
 The contact form in `src/pages/Contact.tsx` sends the submitted name, email, selected services, and message to the configured n8n `webhook-test` endpoint. This is a test-mode URL; verify the n8n workflow is actively listening before testing submissions. Before using the form for production enquiries, confirm that the endpoint is intentionally configured for production.
 
+The JSON request body has this shape:
+
+```json
+{
+  "name": "string",
+  "email": "string",
+  "services": ["string"],
+  "message": "string"
+}
+```
+
+Each entry in `services` is the option's configured `value`, not its visible label.
+
 ## Lovable workspace
 
 This repository is linked to the [Shinrai Connect Lovable project](https://lovable.dev/projects/0415b28e-52e4-4a3b-bf65-750297af62d4). Changes pushed to the repository can also be reflected in the linked Lovable project.
